@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AiCademy - Administration</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/lucide-react/dist/index.js"></script>
+    <style>
+        body {
+            position: relative;
+            color: #333333;
+            overflow: hidden;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url(https://www.astate.edu/a/global-initiatives/international/partner-universities/Chandigarh2.jpg) no-repeat center center fixed;
+            background-size: cover;
+            filter: blur(8px);
+            z-index: -1;
+        }
+        .title {
+            font-family: 'Lobster', cursive;
+            font-size: 4rem;
+            text-align: center;
+            margin-top: 20px;
+            color: #B71C1C;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 50px;
+            height: 100vh;
+        }
+        .info {
+            width: 60%;
+            font-size: 1.2rem;
+            background: rgba(250, 250, 250, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        .info h2 {
+            font-weight: bolder;
+            text-align: center; /* Centering the heading */
+        }
+        .info p {
+            margin-bottom: 0.25cm; /* Adding space between the paragraph and the options */
+        }
+        .chat-container {
+            width: 35%;
+            height: 60vh;
+            margin-right: 10px;
+            background: rgba(250, 250, 250, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .chat-box {
+            height: 250px;
+            overflow-y: auto;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+        }
+        .user-input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background: linear-gradient(to right, #D32F2F, #B71C1C);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        button:hover {
+            background: #FFC107;
+            color: #333333;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="flex flex-col h-screen p-4">
+    <h1 class="title">Administration Assistance</h1>
+    
+    <div class="container">
+        <div class="info">
+            <h2>Welcome to Administration Assistance</h2>
+            <p>Here, you can find all the information regarding admissions, office hours, fee payments, and more. Our chatbot is available to help answer your queries in real-time.</p>
+            
+            <ul style="text-align: left;">
+                <li>📌 Office Hours: 9 AM - 5 PM (Mon-Fri)</li>
+                <li>📌 <a href='courses.html' style='color: inherit; text-decoration: none; cursor: pointer;' onmouseover="this.style.color='#D32F2F'" onmouseout="this.style.color='inherit'">Courses Provided</a></li>
+                <li>📌 <a href='admission.html' style='color: inherit; text-decoration: none; cursor: pointer;' onmouseover="this.style.color='#D32F2F'" onmouseout="this.style.color='inherit'">Admission Process Details</a></li>
+                <li>📌 Student Helpline No: 1800 257 1800</li>
+                <li>📌 Email: admissions@cumail.in</li>
+            </ul>
+        </div>
+        
+        <div class="chat-container">
+            <div class="chat-box" id="chatBox">
+                <p><strong>Bot:</strong> Hello! How can I assist you with administration-related queries?</p>
+            </div>
+            <input type="text" id="userInput" class="user-input" placeholder="Type your query..." onkeypress="handleKeyPress(event)">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+    
+    <script>
+        function sendMessage() {
+            let userInput = document.getElementById('userInput').value;
+            if (userInput.trim() === "") return;
+            let chatBox = document.getElementById('chatBox');
+            chatBox.innerHTML += `<p><strong>You:</strong> ${userInput}</p>`;
+            document.getElementById('userInput').value = "";
+            
+            setTimeout(() => {
+                let response = getBotResponse(userInput);
+                chatBox.innerHTML += `<p><strong>Bot:</strong> ${response}</p>`;
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }, 1000);
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
+        }
+
+        function getBotResponse(query) {
+            if (query.toLowerCase().includes("office hours")) {
+                return "The administration office is open from 9 AM to 5 PM, Monday to Friday.";
+            } else if (query.toLowerCase().includes("admission process")) {
+                return "You can apply online through our portal. For more details, visit the admission section on our website.";
+            } else if (query.toLowerCase().includes("fees")) {
+                return "Fee payments can be made online through our college portal or at the administration office.";
+            } else {
+                return "I'm not sure about that. Please visit the administration office for more details.";
+            }
+        }
+    </script>
+</body>
+</html>

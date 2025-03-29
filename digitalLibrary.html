@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AiCademy - Subjects</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/lucide-react/dist/index.js"></script>
+    <style>
+        body {
+            position: relative;
+            color: #333333;
+            overflow: hidden;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url(https://www.astate.edu/a/global-initiatives/international/partner-universities/Chandigarh2.jpg) no-repeat center center fixed;
+            background-size: cover;
+            filter: blur(8px);
+            z-index: -1;
+        }
+        .title {
+            font-family: 'Lobster', cursive;
+            font-size: 4rem;
+            text-align: center;
+            margin-top: 5px;
+            color: #B71C1C;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+        }
+        .subjects-box {
+            width: 40%;
+            background: rgba(250, 250, 250, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+            margin-left: 50px;
+        }
+        .subjects-box h2 {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #D32F2F;
+            margin-bottom: 10px;
+        }
+        .subject {
+            font-size: 1.2rem;
+            font-weight: normal;
+            color: #333333;
+            cursor: pointer;
+            transition: color 0.3s;
+            margin: 10px 0;
+            text-decoration: none;
+            display: block;
+        }
+        .subject:hover {
+            color: #D32F2F;
+        }
+    </style>
+</head>
+<body class="flex flex-col h-screen p-4">
+    <h1 class="title">Subjects</h1>
+    
+    <div class="subjects-box">
+        <h2 class="text-2xl font-bold">Subject List</h2>
+        <a href="computer_organization.pptx" class="subject" target="_blank">📌 Computer Organization and Architecture</a>
+        <a href="probability_statistics.pptx" class="subject" target="_blank">📌 Probability and Statistics</a>
+        <a href="oop_java.pptx" class="subject" target="_blank">📌 Object Oriented Programming using Java</a>
+        <a href="database_management.pptx" class="subject" target="_blank">📌 Database Management System</a>
+        <a href="software_engineering.pptx" class="subject" target="_blank">📌 Software Engineering</a>
+        <a href="aptitude.pdf" class="subject" target="_blank">📌 Aptitude</a>
+        <a href="soft_skills.pptx" class="subject" target="_blank">📌 Soft Skills</a>
+    </div>
+</body>
+</html>

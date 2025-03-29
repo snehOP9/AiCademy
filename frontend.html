@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AiCademy</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      background: url(https://images.news18.com/ibnlive/uploads/2022/06/chandigarh-univ-165581419816x9.jpg) no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .title {
+      font-family: 'Lobster', cursive;
+      font-size: 10rem;
+      text-align: center;
+      opacity: 1;
+      transition: font-size 2s ease-in-out;
+    }
+
+    .title.move-to-top {
+      font-size: 4rem;
+      margin-top: 2rem;
+    }
+
+    .content-container {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 2s ease-in-out, transform 2s ease-in-out;
+    }
+
+    .content-container.move-up {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    button {
+      background: linear-gradient(to right, #D32F2F, #B71C1C);
+      color: white;
+    }
+
+    button:hover {
+      background: #FFC107;
+      color: #333333;
+    }
+  </style>
+</head>
+<body class="flex flex-col items-center justify-start p-4 space-y-6">
+
+  <!-- Animated Title -->
+  <h1 id="title" class="title">
+    <span class="text-red-800">Ai</span><span class="text-white">Cademy</span>
+  </h1>
+
+  <!-- Navigation Buttons -->
+  <div id="content" class="content-container flex flex-wrap justify-center gap-4 p-4 bg-black bg-opacity-60 rounded-lg">
+    <button onclick="location.href='administration.html'" class="w-40 h-16 rounded-lg font-semibold text-lg shadow-md">Administration</button>
+    <button onclick="location.href='academics.html'" class="w-40 h-16 rounded-lg font-semibold text-lg shadow-md">Academics</button>
+    <button onclick="location.href='hostel.html'" class="w-40 h-16 rounded-lg font-semibold text-lg shadow-md">Hostel</button>
+    <button onclick="location.href='campus.html'" class="w-40 h-16 rounded-lg font-semibold text-lg shadow-md">Campus Navigation</button>
+    <button onclick="location.href='admission.html'" class="w-40 h-16 rounded-lg font-semibold text-lg shadow-md">Admissions</button>
+    <button onclick="location.href='courses.html'" class="w-40 h-16 rounded-lg font-semibold text-lg shadow-md">Courses</button>
+    <button onclick="location.href='digitalLibrary.html'" class="w-40 h-16 rounded-lg font-semibold text-lg shadow-md">Digital Library</button>
+    <button onclick="location.href='gpacalculator.html'" class="w-40 h-16 rounded-lg font-semibold text-lg shadow-md">GPA Calculator</button>
+  </div>
+
+  <!-- Chatbot -->
+  <div class="bg-white bg-opacity-90 p-4 rounded-lg shadow-lg max-w-2xl w-full mt-6">
+    <h2 class="text-xl font-semibold mb-2">Ask AiCademy Bot</h2>
+    <div class="bg-gray-100 p-2 h-40 overflow-y-auto rounded mb-2" id="chatBox">
+      <p><strong>Bot:</strong> Hi! Ask me anything about AiCademy – admissions, hostels, GPA, etc.</p>
+    </div>
+    <input type="text" id="userInput" placeholder="Type your question..." class="w-full p-2 border rounded mb-2" />
+    <button onclick="sendMessage()" class="w-full bg-red-700 text-white p-2 rounded hover:bg-yellow-400 hover:text-black">Send</button>
+  </div>
+
+  <script>
+    window.onload = function () {
+      setTimeout(() => {
+        document.getElementById("title").classList.add("move-to-top");
+        document.getElementById("content").classList.add("move-up");
+      }, 500);
+    };
+
+    function sendMessage() {
+      const input = document.getElementById('userInput');
+      const chatBox = document.getElementById('chatBox');
+      const message = input.value.trim();
+      if (!message) return;
+      chatBox.innerHTML += `<p><strong>You:</strong> ${message}</p>`;
+      input.value = '';
+      fetch('/api/chatbot', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message })
+      })
+      .then(res => res.json())
+      .then(data => {
+        chatBox.innerHTML += `<p><strong>Bot:</strong> ${data.reply}</p>`;
+        chatBox.scrollTop = chatBox.scrollHeight;
+      });
+    }
+  </script>
+</body>
+</html>
